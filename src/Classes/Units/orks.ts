@@ -1,3 +1,4 @@
+import { Indicators } from './../Indicators/indicators';
 import { Races } from './../Teams/teams';
 import { IUNITS, IUnit } from './../Units/Unit';
 import { Unit } from "./Unit";
@@ -22,25 +23,34 @@ export class Ork extends Unit {
     boostName: string;
 
     constructor(name: string, maxHP: number, damage: number, defend: number, price: number, avatarSrc: string) {
-        super(name, maxHP, damage, defend, price, Races.ORK, avatarSrc);
+        super(
+            name,
+            maxHP,
+            damage,
+            defend,
+            price,
+            avatarSrc,
+            "ORK",
+        )
+            ;
         this.boost = this.boost.bind(this);
         this.boostName = 'fury';
     }
 
     boost() {
-        this.damage = this.damage * 1.2;
+        this.damage = Math.floor(this.damage * 1.2);
     }
 }
 
 
 
-export const archer = new Ork('Archer(human)', 100, 20, 10, 1, archerSRC);
-export const bomber = new Ork('Bomber(human)', 100, 20, 10, 1, bomberSRC);
-export const gunner = new Ork('Gunner(human)', 100, 20, 10, 1, gunnerSRC);
-export const mage = new Ork('Mage(human)', 100, 20, 10, 1, mageSRC);
-export const musketer = new Ork('Musketer(human)', 100, 20, 10, 1, musketerSRC);
-export const priest = new Ork('Priest(human)', 100, 20, 10, 1, priestSRC);
-export const sworder = new Ork('Sworder(human)', 100, 20, 10, 1, sworderSRC);
+export const archer = new Ork('Archer(ork)', Indicators.getRandomLife(), Indicators.getRandomDamage(), Indicators.getRandomDefend(), 1, archerSRC);
+export const bomber = new Ork('Bomber(ork)', Indicators.getRandomLife(), Indicators.getRandomDamage(), Indicators.getRandomDefend(), 1, bomberSRC);
+export const gunner = new Ork('Gunner(ork)', Indicators.getRandomLife(), Indicators.getRandomDamage(), Indicators.getRandomDefend(), 1, gunnerSRC);
+export const mage = new Ork('Mage(ork)', Indicators.getRandomLife(), Indicators.getRandomDamage(), Indicators.getRandomDefend(), 1, mageSRC);
+export const musketer = new Ork('Musketer(ork)', Indicators.getRandomLife(), Indicators.getRandomDamage(), Indicators.getRandomDefend(), 1, musketerSRC);
+export const priest = new Ork('Priest(ork)', Indicators.getRandomLife(), Indicators.getRandomDamage(), Indicators.getRandomDefend(), 1, priestSRC);
+export const sworder = new Ork('Sworder(ork)', Indicators.getRandomLife(), Indicators.getRandomDamage(), Indicators.getRandomDefend(), 1, sworderSRC);
 
 
 export const allOrksUnits = [

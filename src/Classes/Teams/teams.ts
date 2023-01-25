@@ -19,18 +19,42 @@ function randomNum(maxNum: number, minNum = 1) {
 
 export class Team {
     static initTeam(race: Races, count: number) {
-        const result: IUnit[] = [];
 
-        for (let i = 0; i < count; i++) {
-            const index = randomNum(7, 0);
+        const result: any = {};
+
+        while (Object.keys(result).length < count) {
+
             if (race === Races.HUMAN) {
-                result.push(allHumansUnits[index]);
+
+                let unit = getrandomHuman();
+
+                if (!result[unit.name]) {
+                    unit = result[unit.name] = unit;
+                }
+
             }
+
             if (race === Races.ORK) {
-                result.push(allOrksUnits[index]);
+
+                let unit = getrandomOrk();
+
+                if (!result[unit.name]) {
+                    result[unit.name] = unit;
+                }
+
             }
+
         }
 
-        return result;
+        return Object.values(result);
     }
+}
+
+function getrandomHuman() {
+    const index = randomNum(6, 0);
+    return allHumansUnits[index];
+}
+function getrandomOrk() {
+    const index = randomNum(6, 0);
+    return allOrksUnits[index];
 }

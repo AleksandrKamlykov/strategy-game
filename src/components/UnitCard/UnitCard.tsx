@@ -31,7 +31,7 @@ const unitsSRC = [
 
 export const UnitCard: FC<UnitCardProps> = (props) => {
 	const { data, target, setTarget, team, game, nextOdd, forward } = props;
-	const { currenrHP, damage, defend, attack, defender, name, maxHP, } = data;
+	const { currenrHP, damage, defend, attack, defender, name, maxHP, avatarSrc } = data;
 
 	function attackUnit() {
 
@@ -43,10 +43,6 @@ export const UnitCard: FC<UnitCardProps> = (props) => {
 		};
 	}
 
-	function targetUnit() {
-		setTarget(data);
-	}
-	const randomUnit = useMemo(() => randomNum(7, 0), []);
 	const bgColor = data.currenrHP <= 0 ? '#333' : target?.name === data.name ? 'rgba(220,0,0, .9)' : "rgba(180,180,180, .8)";// data.race === Races.ORK ? 'rgba(0,120,0, .8)' : "rgba(0,0,120, .8)";
 	const isDeath = currenrHP <= 0;
 	const isForward = name === forward.name;
@@ -55,7 +51,7 @@ export const UnitCard: FC<UnitCardProps> = (props) => {
 		<h3>{name}</h3>
 		<div className={classes.main}>
 			<div className={classes.avatar} >
-				<img src={unitsSRC[randomUnit]} alt='unit' />
+				<img src={avatarSrc} alt='unit' />
 			</div>
 
 			<ul className={classes.indicators}>

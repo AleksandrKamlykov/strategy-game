@@ -28,7 +28,7 @@ export class Unit {
     price: number;
     avatarSrc: string;
 
-    constructor(name: string, maxHp: number, damage: number, defend: number, price: number, race: string, avatarSrc: string) {
+    constructor(name: string, maxHp: number, damage: number, defend: number, price: number, avatarSrc: string, race: string,) {
         this.name = name;
         this.maxHP = maxHp;
         this.currenrHP = maxHp;

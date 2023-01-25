@@ -1,8 +1,5 @@
 import React, { FC } from 'react';
 import { RiceAdditionalProps } from '.';
-import { Races } from '../../../Classes/Teams/teams';
-import { Human } from '../../../Classes/Units/humans';
-import { Ork } from '../../../Classes/Units/orks';
 import classes from './styles.module.css';
 
 export const RiceAdditional: FC<RiceAdditionalProps> = ({ data, target, setTarget, team, game, nextOdd, forward }) => {
@@ -14,7 +11,6 @@ export const RiceAdditional: FC<RiceAdditionalProps> = ({ data, target, setTarge
 		setTarget(undefined);
 		nextOdd();
 	}
-	console.log(data);
 
 	return <button
 		className={classes.boost}
