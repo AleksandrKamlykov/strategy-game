@@ -1,6 +1,6 @@
-import { IUNITS } from "../../../Objects/Units/Unit";
-import { Human, IHuman } from "../../../Objects/Units/humans";
-import { IOrk } from "../../../Objects/Units/orks";
+import { IUNITS } from "../../../Classes/Units/Unit";
+import { Human, IHuman } from "../../../Classes/Units/humans";
+import { IOrk } from "../../../Classes/Units/orks";
 import { UnitCardProps } from "../UnitCard.props";
 
 export interface RiceAdditionalProps extends UnitCardProps {

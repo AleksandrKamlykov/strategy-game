@@ -1,7 +1,7 @@
-import { IHuman } from './../../Objects/Units/humans';
-import { Teams } from './../../Objects/Teams/teams';
-import { GameProccess } from '../../Objects/Game/Game';
-import { IUnit, IUNITS } from './../../Objects/Units/Unit';
+import { IHuman } from './../../Classes/Units/humans';
+import { Teams } from './../../Classes/Teams/teams';
+import { GameProccess } from '../../Classes/Game/Game';
+import { IUnit, IUNITS } from './../../Classes/Units/Unit';
 
 export interface UnitCardProps {
     data: IUNITS;

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { RiceAdditionalProps } from '.';
-import { Races } from '../../../Objects/Teams/teams';
-import { Human } from '../../../Objects/Units/humans';
-import { Ork } from '../../../Objects/Units/orks';
+import { Races } from '../../../Classes/Teams/teams';
+import { Human } from '../../../Classes/Units/humans';
+import { Ork } from '../../../Classes/Units/orks';
 import classes from './styles.module.css';
 
 export const RiceAdditional: FC<RiceAdditionalProps> = ({ data, target, setTarget, team, game, nextOdd, forward }) => {

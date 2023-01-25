@@ -11,10 +11,12 @@ export interface IUnit {
     race: string;
     attack: (target: IUnit) => void;
     defender: (damage: number) => void;
-
+    avatarSrc: string;
 }
 
 export type IUNITS = IHuman | IOrk;
+
+
 export class Unit {
 
     name: string;
@@ -24,8 +26,9 @@ export class Unit {
     damage: number;
     defend: number;
     price: number;
+    avatarSrc: string;
 
-    constructor(name: string, maxHp: number, damage: number, defend: number, price: number, race: string) {
+    constructor(name: string, maxHp: number, damage: number, defend: number, price: number, race: string, avatarSrc: string) {
         this.name = name;
         this.maxHP = maxHp;
         this.currenrHP = maxHp;
@@ -33,6 +36,7 @@ export class Unit {
         this.damage = damage;
         this.price = price;
         this.race = race;
+        this.avatarSrc = avatarSrc;
         this.attack = this.attack.bind(this);
         this.defender = this.defender.bind(this);
     }

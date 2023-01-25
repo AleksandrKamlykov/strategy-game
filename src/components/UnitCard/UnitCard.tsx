@@ -1,9 +1,9 @@
 import { FC, useContext, useMemo } from 'react';
 import { UnitCardProps } from '.';
 import classes from './styles.module.css';
-import { IUnit } from '../../Objects/Units/Unit';
+import { IUnit } from '../../Classes/Units/Unit';
 import { RiceAdditional } from './RiceAdditional';
-import { Races, Teams } from '../../Objects/Teams/teams';
+import { Races, Teams } from '../../Classes/Teams/teams';
 import archerSRC from "../../images/Archer.png";
 import bomberSRC from "../../images/Bomber.png";
 import gunnerSRC from "../../images/Gunner.png";

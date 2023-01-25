@@ -1,20 +1,20 @@
 import React, { FC, useState } from 'react';
 import { GameProps } from '.';
 import clsses from './style.module.css';
-import { Human, IHuman } from '../../Objects/Units/humans';
+import { Human, IHuman } from '../../Classes/Units/humans';
 import { UnitCard } from '../UnitCard';
-import { IOrk, Ork } from '../../Objects/Units/orks';
-import { GameProccess } from '../../Objects/Game/Game';
-import { Team, Teams } from '../../Objects/Teams/teams';
-import { IUNITS } from '../../Objects/Units/Unit';
+import { IOrk, Ork } from '../../Classes/Units/orks';
+import { GameProccess } from '../../Classes/Game/Game';
+import { Races, Team, Teams } from '../../Classes/Teams/teams';
+import { IUNITS } from '../../Classes/Units/Unit';
 
 
 export const Game: FC<GameProps> = (props) => {
 
 
 	const [teams, setTeams] = useState<any>({
-		[Teams.A]: Team.initTeam(Human, 3, "Human"),
-		[Teams.B]: Team.initTeam(Ork, 3, "Ork")
+		[Teams.A]: Team.initTeam(Races.HUMAN, 3),
+		[Teams.B]: Team.initTeam(Races.ORK, 3)
 	});
 
 	const [game, setGame] = useState<GameProccess>(new GameProccess(teams[Teams.A], teams[Teams.B]));
