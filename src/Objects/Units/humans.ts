@@ -1,24 +1,27 @@
 import { Races } from './../Teams/teams';
-import { IUnit, Unit } from "./Unit";
+import { IUNITS, IUnit, Unit } from "./Unit";
 
 export interface IHuman extends IUnit {
-    treatment: () => void;
+    boost: () => void;
+    boostName: string;
+
 }
 
 export class Human extends Unit {
 
-    constructor(name: string, life: number, damage: number, defend: number, price: number,) {
-        super(name, life, damage, defend, price, Races.HUMAN);
-        this.treatment = this.treatment.bind(this);
+    boostName: string;
+
+    constructor(name: string, maxHP: number, damage: number, defend: number, price: number,) {
+        super(name, maxHP, damage, defend, price, Races.HUMAN);
+        this.boost = this.boost.bind(this);
+        this.boostName = 'Health';
     }
 
-    treatment() {
-        console.log(this);
+    boost(target: IUNITS) {
 
-        this.life = this.life + 3;
+        const newCurrentHP = target.currenrHP + 3;
+
+        target.currenrHP = newCurrentHP > target.maxHP ? target.maxHP : newCurrentHP;
     }
 
-    // treatment(target: Unit) {
-    //     target.life = target.life + 3;
-    // }
 }

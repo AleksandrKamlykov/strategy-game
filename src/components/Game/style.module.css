@@ -1,13 +1,16 @@
 .wrapper{
     display: flex;
     min-height: 200px;
-    border: 2px solid #ccc;
     padding: 40px;
     justify-content: space-between;
+text-align: center;
+color: #000;
 }
 
 .wrapper > div {
+    min-width: 350px;
     display: flex;
     flex-direction: column;
-    gap:30px
+    gap:30px;
+
 }

@@ -1,19 +1,23 @@
 import { Races } from './../Teams/teams';
-import { IUnit } from './../Units/Unit';
+import { IUNITS, IUnit } from './../Units/Unit';
 import { Unit } from "./Unit";
 
 export interface IOrk extends IUnit {
-    fury: () => void;
+    boost: () => void;
+    boostName: string;
 }
 
 export class Ork extends Unit {
 
+    boostName: string;
 
-    constructor(name: string, life: number, damage: number, defend: number, price: number) {
-        super(name, life, damage, defend, price, Races.ORK);
+    constructor(name: string, maxHP: number, damage: number, defend: number, price: number) {
+        super(name, maxHP, damage, defend, price, Races.ORK);
+        this.boost = this.boost.bind(this);
+        this.boostName = 'fury';
     }
 
-    fury(target: Unit) {
-        target.damage = target.damage + 2;
+    boost() {
+        this.damage = this.damage * 1.2;
     }
 }

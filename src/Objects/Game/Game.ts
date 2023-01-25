@@ -1,3 +1,4 @@
+import { IUNITS } from './../Units/Unit';
 import { Teams } from './../Teams/teams';
 import { IUnit } from "../Units/Unit";
 
@@ -5,18 +6,21 @@ export class GameProccess {
 
     oddTeams: Teams;
     oddUnit: number;
-    leftTeamsLength: number;
-    rightTeamsLength: number;
+    teamALength: number;
+    teamBLength: number;
+    teamA: IUNITS[];
+    teamB: IUNITS[];
 
-    constructor(leftTeams: IUnit[], rightTeams: IUnit[]) {
+    constructor(teamA: IUNITS[], teamB: IUNITS[]) {
         this.oddTeams = Teams.A;
         this.oddUnit = 0;
-        this.leftTeamsLength = leftTeams.length;
-        this.rightTeamsLength = rightTeams.length;
+        this.teamALength = teamA.length;
+        this.teamBLength = teamB.length;
+        this.teamA = teamA;
+        this.teamB = teamB;
     }
 
     get getGame() {
-        console.log(this);
 
         return this;
     }
@@ -27,7 +31,10 @@ export class GameProccess {
             this.oddTeams = Teams.B;
         } else {
             this.oddTeams = Teams.A;
-            this.oddUnit = this.oddUnit + 1;
+
+            const nextUnit = this.oddUnit >= this.teamALength ? 0 : this.oddUnit + 1;
+
+            this.oddUnit = nextUnit;
         }
 
     }

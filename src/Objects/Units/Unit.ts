@@ -1,7 +1,10 @@
+import { IHuman } from "./humans";
+import { IOrk } from "./orks";
 
 export interface IUnit {
     name: string;
-    life: number;
+    currenrHP: number;
+    maxHP: number;
     damage: number;
     defend: number;
     price: number;
@@ -11,19 +14,21 @@ export interface IUnit {
 
 }
 
-
+export type IUNITS = IHuman | IOrk;
 export class Unit {
 
     name: string;
     race: string;
-    life: number;
+    currenrHP: number;
+    maxHP: number;
     damage: number;
     defend: number;
     price: number;
 
-    constructor(name: string, life: number, damage: number, defend: number, price: number, race: string) {
+    constructor(name: string, maxHp: number, damage: number, defend: number, price: number, race: string) {
         this.name = name;
-        this.life = life;
+        this.maxHP = maxHp;
+        this.currenrHP = maxHp;
         this.defend = defend;
         this.damage = damage;
         this.price = price;
@@ -42,7 +47,9 @@ export class Unit {
 
         damage = damage - this.defend;
 
-        this.life = this.life - damage;
+        const newCurrentHP = this.currenrHP - damage;
+
+        this.currenrHP = newCurrentHP > 0 ? newCurrentHP : 0;
 
 
     }

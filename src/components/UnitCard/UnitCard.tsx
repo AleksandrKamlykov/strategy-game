@@ -1,19 +1,43 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useMemo } from 'react';
 import { UnitCardProps } from '.';
 import classes from './styles.module.css';
 import { IUnit } from '../../Objects/Units/Unit';
 import { RiceAdditional } from './RiceAdditional';
-import { Races } from '../../Objects/Teams/teams';
+import { Races, Teams } from '../../Objects/Teams/teams';
+import archerSRC from "../../images/Archer.png";
+import bomberSRC from "../../images/Bomber.png";
+import gunnerSRC from "../../images/Gunner.png";
+import mageSRC from "../../images/Mage.png";
+import musketerSRC from "../../images/Musketeer.png";
+import priestSRC from "../../images/Priest.png";
+import sworderSRC from "../../images/Sworder.png";
 
-export const UnitCard: FC<UnitCardProps> = ({ data, target, setTarget, team, game, nextOdd }) => {
+import citizenSRC from "../../images/Citizen.png";
 
-	const { life, damage, defend, attack, defender, name } = data;
+function randomNum(maxNum: number, minNum = 1) {
+	return Math.floor(Math.random() * (maxNum - minNum) + minNum);
+}
+
+const unitsSRC = [
+	archerSRC,
+	bomberSRC,
+	gunnerSRC,
+	mageSRC,
+	musketerSRC,
+	priestSRC,
+	sworderSRC,
+];
+
+
+export const UnitCard: FC<UnitCardProps> = (props) => {
+	const { data, target, setTarget, team, game, nextOdd, forward } = props;
+	const { currenrHP, damage, defend, attack, defender, name, maxHP, } = data;
 
 	function attackUnit() {
 
-		if (target) {
+		if (true) {
 
-			attack(target);
+			forward?.attack(data);
 			setTarget(undefined);
 			nextOdd();
 		};
@@ -22,33 +46,44 @@ export const UnitCard: FC<UnitCardProps> = ({ data, target, setTarget, team, gam
 	function targetUnit() {
 		setTarget(data);
 	}
+	const randomUnit = useMemo(() => randomNum(7, 0), []);
+	const bgColor = data.currenrHP <= 0 ? '#333' : target?.name === data.name ? 'rgba(220,0,0, .9)' : "rgba(180,180,180, .8)";// data.race === Races.ORK ? 'rgba(0,120,0, .8)' : "rgba(0,0,120, .8)";
+	const isDeath = currenrHP <= 0;
+	const isForward = name === forward.name;
 
-	const bgColor = data.life <= 0 ? '#333' : target?.name === data.name ? 'rgba(140,0,0, .5)' : data.race === Races.ORK ? 'rgba(0,140,0, .5)' : "rgba(0,0,140, .5)";
-	const isDeath = life <= 0;
-	return <div className={classes.wrapper} style={{ backgroundColor: bgColor }}>
+	return <div className={classes.wrapper} style={{ backgroundColor: bgColor, border: isForward ? (game.oddTeams === Teams.A ? "3px solid #22f" : "3px solid #2f2") : "3px solid transparent" }}>
 		<h3>{name}</h3>
 		<div className={classes.main}>
+			<div className={classes.avatar} >
+				<img src={unitsSRC[randomUnit]} alt='unit' />
+			</div>
+
 			<ul className={classes.indicators}>
-				<li>Life: {life}</li>
+				<li className={classes.life} >
+					<div style={{ width: `${(100 / maxHP) * currenrHP}%` }} />
+					<span>HP: {currenrHP}</span>
+				</li>
 				<li>Damage: {damage}</li>
 				<li>Defend: {defend}</li>
 			</ul>
-			<div>
+			<div className={classes.actions}>
 				<button
-					disabled={!target || (game.oddTeams !== team) || isDeath}
+					disabled={(game.oddTeams == team) || isDeath}
 					onClick={attackUnit}
-					className={classes.target}
-				>
-					Target
-				</button>
-				<button
-					onClick={targetUnit}
 					className={classes.attack}
-					disabled={(game.oddTeams === team) || !!target || isDeath}
 				>
 					Attack
 				</button>
-				<RiceAdditional data={data} />
+				{/* <button
+					className={classes.target}
+					onClick={targetUnit}
+					disabled={!!target || isDeath}
+				>
+					Target
+				</button> */}
+				<RiceAdditional
+					{...props}
+				/>
 			</div>
 		</div>
 	</div>;

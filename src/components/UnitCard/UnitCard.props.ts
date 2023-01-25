@@ -1,13 +1,13 @@
 import { IHuman } from './../../Objects/Units/humans';
 import { Teams } from './../../Objects/Teams/teams';
 import { GameProccess } from '../../Objects/Game/Game';
-import { IUnit } from './../../Objects/Units/Unit';
-import { IOrk } from '../../Objects/Units/orks';
+import { IUnit, IUNITS } from './../../Objects/Units/Unit';
 
 export interface UnitCardProps {
-    data: IHuman | IOrk;
-    target: IUnit | undefined;
-    setTarget: (target: IHuman | IOrk | undefined) => void;
+    data: IUNITS;
+    target: IUNITS | undefined;
+    forward: IUNITS;
+    setTarget: (target: IUNITS | undefined) => void;
     team: Teams;
     game: any,
     nextOdd: () => void;
