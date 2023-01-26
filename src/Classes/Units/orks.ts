@@ -34,7 +34,7 @@ export class Ork extends Unit {
         )
             ;
         this.boost = this.boost.bind(this);
-        this.boostName = 'fury';
+        this.boostName = 'fury (+ 20% damage)';
     }
 
     boost() {

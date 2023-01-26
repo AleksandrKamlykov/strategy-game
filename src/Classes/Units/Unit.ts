@@ -41,7 +41,7 @@ export class Unit {
         this.defender = this.defender.bind(this);
     }
 
-    attack(target: Unit) {
+    attack(target: IUnit) {
 
 
         target.defender(this.damage);

@@ -7,15 +7,15 @@ function randomNum(maxNum: number, minNum = 1) {
 export class Indicators {
 
     static getRandomLife() {
-        return randomNum(70, 50);
+        return randomNum(100, 40);
     }
 
     static getRandomDamage() {
-        return randomNum(20, 10);
+        return randomNum(30, 10);
     }
 
     static getRandomDefend() {
-        return randomNum(8, 1);
+        return randomNum(9, 1);
     }
 
     static addIdToName(name: string) {

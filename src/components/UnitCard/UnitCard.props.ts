@@ -1,6 +1,6 @@
 import { IHuman } from './../../Classes/Units/humans';
 import { Teams } from './../../Classes/Teams/teams';
-import { GameProccess } from '../../Classes/Game/Game';
+import { GameProccess } from '../../Classes/GameClass/Game';
 import { IUnit, IUNITS } from './../../Classes/Units/Unit';
 
 export interface UnitCardProps {
