@@ -3,31 +3,14 @@
     border-radius: 40px;
     padding: 10px;
     transition: .3s;
-    width: 100%;
 color: rgb(0, 0, 0);
 position: relative;
 overflow: hidden;
 background-color: rgba(192, 191, 191, 0.541);
 }
-.bg{
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right:0;
-    filter: blur(6px);
-    
-}
 
-.wrapper * {
-    z-index: 10
-}
 .wrapper:hover{
     box-shadow: 2px 2px 2px 2px rgba(66, 66, 66, 0.55);
-}
-.wrapper> h3{
-    color: #222;
 }
 
 .indicators{
@@ -35,20 +18,24 @@ background-color: rgba(192, 191, 191, 0.541);
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.indicators >li{
+    width: 100%;
 }
 
 .main{
     margin-top: 30px;
     display: flex;
-    width: 100%;
     justify-content: space-between;
 }
 .actions{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 15px;
-    margin-left: 20px;
+    padding: 0px;
 }
 
 .attack{
@@ -60,19 +47,11 @@ background-color: rgba(192, 191, 191, 0.541);
     font-size: 1.1rem;
     cursor: pointer;
     transition: .3s;
+    width: 100%;
 }
 
-.target{
-    background-color: rgb(162, 113, 6);
-    color: #eee;
-    border: none;
-    border-radius: 8px;
-    padding: 5px 10px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: .3s;
-}
-.attack:disabled,.target:disabled{
+
+.attack:disabled{
     background-color: #444;
     cursor:not-allowed;
 }
@@ -105,11 +84,34 @@ position: absolute;
 }
 
 .avatar{
-    width: 140px;
-    height: auto;
+    /* width: 140px; */
+    height: 160px;
 display: flex;
 justify-content: center;
 }
 .avatar >img{
     width: 100%;
+}
+
+.menu{
+    display: flex;
+    gap: 20px;
+}
+@media (max-width: 1280px) {
+    .menu{
+        flex-direction: column;
+    }
+}
+@media (max-width: 1000px) {
+.wrapper{
+    max-width: 320px;
+}
+}
+@media (max-width: 800px) {
+    .avatar{
+        height: 80px;
+    }
+    .wrapper{
+        max-width: 260px;
+    }
 }

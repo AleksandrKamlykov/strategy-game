@@ -23,28 +23,30 @@ export const UnitCard: FC<UnitCardProps> = (props) => {
 		<h3 style={{ color: team === Teams.A ? "#22f" : "#2f2" }}>{name}</h3>
 		<div className={classes.main}>
 			<div className={classes.avatar} >
-				<img src={avatarSrc} alt='unit' />
+				<img width="100%" height="100%" src={avatarSrc} alt='unit' />
 			</div>
 
-			<ul className={classes.indicators}>
-				<li className={classes.life} >
-					<div style={{ width: `${(100 / maxHP) * currenrHP}%` }} />
-					<span>HP: {currenrHP}</span>
-				</li>
-				<li>Damage: {damage}</li>
-				<li>Defend: {defend}</li>
-			</ul>
-			<div className={classes.actions}>
-				<button
-					disabled={(game.oddTeams == team) || isDeath}
-					onClick={attackUnit}
-					className={classes.attack}
-				>
-					Attack
-				</button>
-				<RiceAdditional
-					{...props}
-				/>
+			<div className={classes.menu}>
+				<ul className={classes.indicators}>
+					<li className={classes.life} >
+						<div style={{ width: `${(100 / maxHP) * currenrHP}%` }} />
+						<span>HP: {currenrHP}</span>
+					</li>
+					<li>Damage: {damage}</li>
+					<li>Defend: {defend}</li>
+				</ul>
+				<div className={classes.actions}>
+					<button
+						disabled={(game.oddTeams == team) || isDeath}
+						onClick={attackUnit}
+						className={classes.attack}
+					>
+						Attack
+					</button>
+					<RiceAdditional
+						{...props}
+					/>
+				</div>
 			</div>
 		</div>
 
