@@ -1,7 +1,7 @@
 import { allOrksUnits } from './../Units/orks';
 import { allHumansUnits } from './../Units/humans';
 import { Indicators } from '../Indicators/indicators';
-import { IUnit, Unit } from './../Units/Unit';
+import { IUnit, Unit, IUNITS } from './../Units/Unit';
 
 export enum Teams {
     A = "A",
@@ -18,7 +18,18 @@ function randomNum(maxNum: number, minNum = 1) {
 }
 
 export class Team {
-    static initTeam(race: Races, count: number) {
+
+    static getrandomHuman() {
+        const index = randomNum(6, 0);
+        return allHumansUnits[index];
+    }
+
+    static getrandomOrk() {
+        const index = randomNum(6, 0);
+        return allOrksUnits[index];
+    }
+
+    static initTeam(race: Races, count: number): IUNITS[] {
 
         const result: any = {};
 
@@ -26,7 +37,7 @@ export class Team {
 
             if (race === Races.HUMAN) {
 
-                let unit = getrandomHuman();
+                let unit = this.getrandomHuman();
 
                 if (!result[unit.name]) {
                     unit = result[unit.name] = unit;
@@ -36,7 +47,7 @@ export class Team {
 
             if (race === Races.ORK) {
 
-                let unit = getrandomOrk();
+                let unit = this.getrandomOrk();
 
                 if (!result[unit.name]) {
                     result[unit.name] = unit;
@@ -48,13 +59,6 @@ export class Team {
 
         return Object.values(result);
     }
-}
 
-function getrandomHuman() {
-    const index = randomNum(6, 0);
-    return allHumansUnits[index];
-}
-function getrandomOrk() {
-    const index = randomNum(6, 0);
-    return allOrksUnits[index];
+
 }

@@ -6,8 +6,6 @@
 
   /* color-scheme: light dark; */
   color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424; */
-background-image: url(./images/Desert.jpg);
 background-size:cover;
 background-clip: border-box;
 background-position: center;
@@ -17,4 +15,9 @@ background-repeat: no-repeat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

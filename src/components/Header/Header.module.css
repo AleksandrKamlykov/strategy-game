@@ -1,0 +1,16 @@
+.header{
+    height: 40px;
+    background-color: #222;
+}
+.link{
+    border: none;
+    color: #eee;
+    background: transparent;
+    padding: 10px;
+    font-size: 1.2rem;
+    transition: .3s;
+    cursor: pointer;
+}
+.link:hover{
+color: aquamarine;
+}

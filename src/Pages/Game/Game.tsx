@@ -1,24 +1,16 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { GameProps } from '.';
 import clsses from './style.module.css';
-import { UnitCard } from '../UnitCard';
+import { UnitCard } from '../../components/UnitCard';
 import { GameProccess } from '../../Classes/GameClass/Game';
 import { Races, Team, Teams } from '../../Classes/Teams/teams';
 import { IUNITS } from '../../Classes/Units/Unit';
-import { TopMenu } from '../TopMenu';
+import { TopMenu } from '../../components/TopMenu';
+import { GameContext } from '../../App';
 
-export const Game: FC<GameProps> = (props) => {
+export const Game: FC<GameProps> = () => {
 
-
-	const [teams, setTeams] = useState<any>({
-		[Teams.A]: Team.initTeam(Races.HUMAN, 3),
-		[Teams.B]: Team.initTeam(Races.ORK, 3)
-	});
-
-	const [game, setGame] = useState<GameProccess>(new GameProccess(teams[Teams.A], teams[Teams.B]));
-
-	const [target, setTarget] = useState<IUNITS>();
-	const [forward, setForward] = useState<IUNITS>(teams[game.oddTeams][game.indexAUnit]);
+	const { teams, game, target, forward, setForward, setTarget } = useContext(GameContext);
 
 
 	function nextOdd() {
@@ -30,7 +22,7 @@ export const Game: FC<GameProps> = (props) => {
 		}
 	}
 
-	return <div>
+	return <div className={clsses.game}>
 		<TopMenu game={game} />
 		<div className={clsses.wrapper} >
 			{

@@ -26,27 +26,25 @@ export const UnitCard: FC<UnitCardProps> = (props) => {
 				<img width="100%" height="100%" src={avatarSrc} alt='unit' />
 			</div>
 
-			<div className={classes.menu}>
-				<ul className={classes.indicators}>
-					<li className={classes.life} >
-						<div style={{ width: `${(100 / maxHP) * currenrHP}%` }} />
-						<span>HP: {currenrHP}</span>
-					</li>
-					<li>Damage: {damage}</li>
-					<li>Defend: {defend}</li>
-				</ul>
-				<div className={classes.actions}>
-					<button
-						disabled={(game.oddTeams == team) || isDeath}
-						onClick={attackUnit}
-						className={classes.attack}
-					>
-						Attack
-					</button>
-					<RiceAdditional
-						{...props}
-					/>
-				</div>
+			<ul className={classes.indicators}>
+				<li className={classes.life} >
+					<div style={{ width: `${(100 / maxHP) * currenrHP}%` }} />
+					<span>HP: {currenrHP}</span>
+				</li>
+				<li>Damage: {damage}</li>
+				<li>Defend: {defend}</li>
+			</ul>
+			<div className={classes.actions}>
+				<button
+					disabled={(game.oddTeams == team) || isDeath}
+					onClick={attackUnit}
+					className={classes.attack}
+				>
+					Attack
+				</button>
+				<RiceAdditional
+					{...props}
+				/>
 			</div>
 		</div>
 
