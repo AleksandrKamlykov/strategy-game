@@ -19,17 +19,36 @@ function randomNum(maxNum: number, minNum = 1) {
 
 export class Team {
 
-    static getrandomHuman() {
+    private _team: IUNITS[];
+
+
+    constructor(race: Races) {
+        this._team = Team.initTeam(race, 3);
+    }
+
+    public attack(forward: IUNITS, target: IUNITS) {
+
+    }
+
+
+
+
+
+
+
+
+
+    public static getrandomHuman() {
         const index = randomNum(6, 0);
         return allHumansUnits[index];
     }
 
-    static getrandomOrk() {
+    public static getrandomOrk() {
         const index = randomNum(6, 0);
         return allOrksUnits[index];
     }
 
-    static initTeam(race: Races, count: number): IUNITS[] {
+    public static initTeam(race: Races, count: number): IUNITS[] {
 
         const result: any = {};
 

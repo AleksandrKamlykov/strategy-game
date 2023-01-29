@@ -1,3 +1,4 @@
+import { ACTION } from './../../Classes/Actions/Actions';
 import { IHuman } from './../../Classes/Units/humans';
 import { Teams } from './../../Classes/Teams/teams';
 import { GameProccess } from '../../Classes/GameClass/Game';
@@ -7,8 +8,10 @@ export interface UnitCardProps {
     data: IUNITS;
     target: IUNITS | undefined;
     forward: IUNITS;
-    setTarget: (target: IUNITS | undefined) => void;
+    setTarget: Function;
     team: Teams;
     game: any,
     nextOdd: () => void;
+    action: ACTION;
+    setAction: Function;
 }
