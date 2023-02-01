@@ -45,7 +45,7 @@ export const UnitCard: FC<UnitCardProps> = (props) => {
 			<div className={classes.actions}>
 				{
 					team !== game.playersTeam ? <button
-						disabled={(game.oddTeams == team) || isDeath}
+						disabled={(game.oddTeams == team) || isDeath || action !== ACTION.DEFAULT}
 						onClick={attack}
 						className={classes.attack}
 					>

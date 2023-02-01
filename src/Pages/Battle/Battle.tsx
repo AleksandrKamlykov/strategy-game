@@ -9,8 +9,10 @@ import { AIBattle } from '../../Classes/AIClass/AI';
 import { ACTION } from '../../Classes/Actions/Actions';
 import { Attacker } from '../../Classes/Attacker/Attacker';
 import { GameProccess } from '../../Classes/GameClass/Game';
+import { Booster } from '../../Classes/Booster/Booster';
 
 const TIMER = 600; //ms
+const AI_THINK_TIMER = 2000; //ms
 
 export const Battle: FC<BattleProps> = ({ teams, game, target, forward, setForward, setTarget, action, setAction, setGame, setTeams }) => {
 
@@ -36,7 +38,12 @@ export const Battle: FC<BattleProps> = ({ teams, game, target, forward, setForwa
 		}
 
 		if (!game.gameEnd && game.oddTeams === Teams.B && forwardUnit) {
-			aiOdd();
+			setAction(ACTION.LOADING);
+			const timer = setTimeout(() => {
+				setAction(ACTION.DEFAULT);
+				aiOdd();
+				clearTimeout(timer);
+			}, AI_THINK_TIMER);
 		}
 
 		const timer = setTimeout(() => {
@@ -56,11 +63,18 @@ export const Battle: FC<BattleProps> = ({ teams, game, target, forward, setForwa
 
 		if (targetUnit.race === Races.ORK) {
 			setAction(ACTION.BOOST);
+			Booster.boost(targetUnit);
+		} else {
+			setAction(ACTION.ATTACK);
+			Attacker.attack(forward, targetUnit);
 		}
-
 		setTarget(targetUnit);
 		const forwardUnit = game.nextOdd();
 		forwardUnit && setForward(forwardUnit);
+		const timer = setTimeout(() => {
+			setAction(ACTION.DEFAULT);
+			clearTimeout(timer);
+		}, TIMER);
 	}
 
 	function attackUnit(targetUnit: Unit) {
@@ -77,6 +91,7 @@ export const Battle: FC<BattleProps> = ({ teams, game, target, forward, setForwa
 	function boost(target: Unit) {
 		setTarget(target);
 		setAction(ACTION.BOOST);
+		Booster.boost(target);
 		const timer = setTimeout(() => {
 			//setTarget(undefined);
 			nextOdd();
@@ -87,7 +102,7 @@ export const Battle: FC<BattleProps> = ({ teams, game, target, forward, setForwa
 
 
 	return <div className={clsses.game}>
-		<TopMenu game={game} />
+		<TopMenu game={game} forward={forward} />
 		<div className={clsses.wrapper} >
 			{
 				!game.gameEnd && teams[Teams.A].length > 0 && teams[Teams.B].length > 0 ?

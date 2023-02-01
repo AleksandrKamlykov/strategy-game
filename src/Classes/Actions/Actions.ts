@@ -1,8 +1,8 @@
 export enum ACTION {
     ATTACK = "ATTACK",
     BOOST = "BOOST",
-    DEFAULT = "DEFAULT"
-    // ATTACK = "ATTACK"
+    DEFAULT = "DEFAULT",
+    LOADING = "LOADING",
 }
 
 export class Action {

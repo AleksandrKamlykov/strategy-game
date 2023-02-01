@@ -73,18 +73,15 @@ export class AIBattle {
         if (isBoostOrk && !this.boostNames.includes(isBoostOrk.name) && (forwardUnit.name !== isBoostOrk.name)) {
             console.log('boost', isBoostOrk);
             this.boostNames.push(isBoostOrk.name);
-            const target = Booster.boost(isBoostOrk);
-            return target;
+            return isBoostOrk;
         }
         if (damage >= (minimalHPtUnit.currentHP + minimalHPtUnit.defend) || isFullHP) {
             console.log('minimalHPtUnit', minimalHPtUnit);
-            const target = Attacker.attack(forwardUnit, minimalHPtUnit);
-            return target;
+            return minimalHPtUnit;
         } else {
             console.log('minimalPrecentUnit', minimalPrecentUnit);
             if (minimalPrecentUnit) {
-                const target = Attacker.attack(forwardUnit, minimalPrecentUnit);
-                return target;
+                return minimalPrecentUnit;
             }
 
         }

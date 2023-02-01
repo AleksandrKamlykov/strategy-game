@@ -6,11 +6,10 @@
     background-size: cover;
     padding: 30px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 33% 64%;
     grid-template-rows: 100px 1fr;
     grid-column-gap: 7px;
     grid-row-gap: 10px;
-
 }
 
 .menu {
@@ -61,27 +60,48 @@
 
 }
 
-.team {
+.team, .shop {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: fit-content;
-    grid-area: 2 / 1 / 3 / 2;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.team>h3 {
+.team>h3, .shop>h3 {
     text-align: center;
     font-size: 2rem;
 }
 
+.team {
+    grid-area: 2 / 1 / 3 / 2;
+
+}
+
 .shop {
+    margin-top: 80px;
     grid-area: 2 / 2 / 3 / 3;
-    display: grid;
+    /* display: grid; */
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
     grid-template-rows: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* width: fit-content;
+    align-items: center;
+    gap: 20px;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
+
+.shop>div {
+    width: 40%;
 }
 
 .shop>h3 {
@@ -102,4 +122,19 @@
     background-color: #222;
     color: #eee;
     cursor: default;
+}
+
+@media (max-width:950px) {
+    .wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .shop {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .shop>div {
+        width: auto;
+    }
 }

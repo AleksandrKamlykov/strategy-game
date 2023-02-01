@@ -78,7 +78,6 @@
     .main {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
         grid-column-gap: 7px;
         grid-row-gap: 10px;
     }
@@ -100,11 +99,21 @@
     .wrapper {
         max-width: 320px;
     }
+
+    .main {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+
+    }
+
+    .indicators {
+        grid-area: auto;
+    }
 }
 
 @media (max-width: 800px) {
     .avatar {
-        height: 100px;
+        /* height: 100px; */
     }
 
     .wrapper {
@@ -129,5 +138,16 @@
 
     .actions {
         grid-area: 2 / 1 / 3 / 3;
+    }
+
+    .main {
+        min-width: 140px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+    }
+
+    .indicators {
+        grid-area: auto;
     }
 }
