@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 import arrowSrc from '../../images/Pointer.png';
 import coinsSrc from '../../images/coins.png';
-import { UnitCard } from '../../components/UnitCard';
 import { MarketCard } from '../../components/MarketCard';
 import { Races, Team, Teams, TypeTeam } from '../../Classes/Teams/teams';
 import { Unit } from '../../Classes/Units/Unit';
