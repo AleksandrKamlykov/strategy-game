@@ -1,19 +1,42 @@
-import { IUNITS } from './../Units/Unit';
+import { Attacker } from './../Attacker/Attacker';
+import { Booster } from './../Booster/Booster';
+import { Unit } from "../Units/Unit";
 
 export class AIBattle {
 
     static boostNames: string[] = [];
 
-    static findMinimalPrecentHPUnit(team: IUNITS[]): IUNITS {
+    static findMinimalPrecentHPUnit(team: Unit[]): Unit | undefined {
 
-        let unit: IUNITS = team.find((unit) => unit.currenrHP > 0) || team[0];
+        let unit: any = team.find((unit) => unit.currentHP > 0);
 
-        team.forEach((b: IUNITS) => {
+        if (unit) {
 
-            const currentPrecent = b.currenrHP / b.maxHP;
-            const unitPrecent = unit.currenrHP / unit.maxHP;
+            team.forEach((b: Unit) => {
 
-            if (b.currenrHP > 0) {
+                const currentPrecent = b.currentHP / b.maxHP;
+                const unitPrecent = unit.currentHP / unit.maxHP;
+
+                if (b.currentHP > 0) {
+
+                    currentPrecent < unitPrecent ? unit = b : undefined;
+                }
+            });
+        }
+
+        return unit;
+    }
+
+    static findMinimalHPUnit(team: Unit[]): Unit {
+
+        let unit: Unit = team.find((unit) => !unit.isDead) || team[0];
+
+        team.forEach((b: Unit) => {
+
+            const currentPrecent = b.currentHP;
+            const unitPrecent = unit.currentHP;
+
+            if (b.currentHP > 0) {
 
                 currentPrecent < unitPrecent ? unit = b : undefined;
             }
@@ -22,40 +45,22 @@ export class AIBattle {
         return unit;
     }
 
-    static findMinimalHPUnit(team: IUNITS[]): IUNITS {
+    static isFullHPOfAll(team: Unit[]): boolean {
 
-        let unit: IUNITS = team.find((unit) => unit.currenrHP > 0) || team[0];
-
-        team.forEach((b: IUNITS) => {
-
-            const currentPrecent = b.currenrHP;
-            const unitPrecent = unit.currenrHP;
-
-            if (b.currenrHP > 0) {
-
-                currentPrecent < unitPrecent ? unit = b : undefined;
-            }
-        });
-
-        return unit;
+        return team.every(unit => unit.maxHP === unit.currentHP);
     }
 
-    static isFullHPOfAll(team: IUNITS[]): boolean {
+    static isBoostOrk(orkTeam: Unit[], enemyTeam: Unit[]): Unit | null {
 
-        return team.every(unit => unit.maxHP === unit.currenrHP);
-    }
-
-    static isBoostOrk(orkTeam: IUNITS[], enemyTeam: IUNITS[]): IUNITS | null {
-
-        const averageDamageEnemy = enemyTeam.reduce((a: number, b: IUNITS) => {
+        const averageDamageEnemy = enemyTeam.reduce((a: number, b: Unit) => {
             return a + b.damage;
         }, 0) / enemyTeam.length;
-        const lowDamageOrk = orkTeam.reduce((a: IUNITS, b: IUNITS) => (a.damage > b.damage ? b : a));
+        const lowDamageOrk = orkTeam.reduce((a: Unit, b: Unit) => (a.damage > b.damage ? b : a));
 
         return averageDamageEnemy > lowDamageOrk.damage ? lowDamageOrk : null;
     }
 
-    static attackEnemy(forwardUnit: IUNITS, forwardTeam: IUNITS[], enemyTeam: IUNITS[]): IUNITS | null {
+    static attackEnemy(forwardUnit: Unit, forwardTeam: Unit[], enemyTeam: Unit[]): Unit | undefined {
 
         const damage = forwardUnit.damage;
 
@@ -68,17 +73,20 @@ export class AIBattle {
         if (isBoostOrk && !this.boostNames.includes(isBoostOrk.name) && (forwardUnit.name !== isBoostOrk.name)) {
             console.log('boost', isBoostOrk);
             this.boostNames.push(isBoostOrk.name);
-            isBoostOrk.boost();
-            return null;
+            const target = Booster.boost(isBoostOrk);
+            return target;
         }
-        if (damage >= (minimalHPtUnit.currenrHP + minimalHPtUnit.defend) || isFullHP) {
+        if (damage >= (minimalHPtUnit.currentHP + minimalHPtUnit.defend) || isFullHP) {
             console.log('minimalHPtUnit', minimalHPtUnit);
-            forwardUnit.attack(minimalHPtUnit);
-            return minimalHPtUnit;
+            const target = Attacker.attack(forwardUnit, minimalHPtUnit);
+            return target;
         } else {
             console.log('minimalPrecentUnit', minimalPrecentUnit);
-            forwardUnit.attack(minimalPrecentUnit);
-            return minimalPrecentUnit;
+            if (minimalPrecentUnit) {
+                const target = Attacker.attack(forwardUnit, minimalPrecentUnit);
+                return target;
+            }
+
         }
     }
 }

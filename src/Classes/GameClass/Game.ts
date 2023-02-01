@@ -1,5 +1,5 @@
+import { Unit } from './../Units/Unit';
 import { Teams } from './../Teams/teams';
-import { IUNITS } from '../Units/Unit';
 
 export class GameProccess {
 
@@ -8,12 +8,14 @@ export class GameProccess {
     private _teamBLength: number;
     private _indexAUnit: number;
     private _indexBUnit: number;
-    private _A: IUNITS[];
-    private _B: IUNITS[];
+    private _A: Unit[];
+    private _B: Unit[];
     private _gameEnd: boolean;
+    private _playerTeam: Teams;
 
-    constructor(teamA: IUNITS[], teamB: IUNITS[]) {
+    constructor(teamA: Unit[], teamB: Unit[]) {
         this._oddTeams = Teams.A;
+        this._playerTeam = Teams.A;
         this._teamALength = teamA.length;
         this._teamBLength = teamB.length;
         this._A = teamA;
@@ -23,36 +25,39 @@ export class GameProccess {
         this._gameEnd = false;
     }
 
-    get getGame() {
+    get getGame(): GameProccess {
         return this;
     }
-    get oddTeams() {
+    get oddTeams(): Teams {
         return this._oddTeams;
     }
-    get indexAUnit() {
+    get indexAUnit(): number {
         return this._indexAUnit;
     }
-    get indexBUnit() {
+    get indexBUnit(): number {
         return this._indexBUnit;
     }
-    get A() {
+    get A(): Unit[] {
         return this._A;
     }
-    get B() {
+    get B(): Unit[] {
         return this._B;
     }
-    get gameEnd() {
+    get gameEnd(): boolean {
         return this._gameEnd;
+    }
+    get playersTeam(): Teams {
+        return this._playerTeam;
     }
 
 
-    checkNextUnit(nextTeam: Teams): IUNITS {
+    checkNextUnit(nextTeam: Teams): Unit {
 
         let nextIndex = nextTeam === Teams.B ? this._indexBUnit : this._indexAUnit;
 
         let nextUnit = this[nextTeam][nextIndex];
 
-        while (nextUnit.currenrHP <= 0) {
+        while (nextUnit.currentHP <= 0) {
 
             nextIndex += 1;
             if (nextIndex >= this._teamALength) {
@@ -72,14 +77,14 @@ export class GameProccess {
 
     isGameEnded(nextTeam: Teams): boolean {
 
-        const end = this[nextTeam].every((unit: IUNITS) => unit.currenrHP <= 0);
+        const end = this[nextTeam].every((unit: Unit) => unit.currentHP <= 0);
 
         return end;
     }
 
 
 
-    nextOdd(): IUNITS | undefined {
+    nextOdd(): Unit | undefined {
 
         const endGame = this.isGameEnded(this._oddTeams === Teams.A ? Teams.B : Teams.A);
 

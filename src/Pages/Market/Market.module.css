@@ -95,4 +95,11 @@
     color: #222;
     padding: 10px;
     font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.add:disabled {
+    background-color: #222;
+    color: #eee;
+    cursor: default;
 }

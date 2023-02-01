@@ -8,5 +8,8 @@ export const Header: FC<HeaderProps> = (props) => {
 		<Link to="/strategy-game/">
 			<button className={classes.link}>home</button>
 		</Link>
+		<Link to="/strategy-game/market">
+			<button className={classes.link}>Market</button>
+		</Link>
 	</header>;
 };

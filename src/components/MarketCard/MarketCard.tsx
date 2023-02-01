@@ -4,7 +4,7 @@ import classes from './MarketCard.module.css';
 
 export const MarketCard: FC<MarketCardProps> = ({ item, children }) => {
 
-	const { currenrHP, damage, defend, name, maxHP, avatarSrc, price } = item;
+	const { currentHP, damage, defend, name, maxHP, avatarSrc, price } = item;
 
 	return <div className={classes.wrapper} >
 		<h3 >{name}</h3>
@@ -16,8 +16,8 @@ export const MarketCard: FC<MarketCardProps> = ({ item, children }) => {
 			<ul className={classes.indicators}>
 				<li>Price: {price} coin</li>
 				<li className={classes.life} >
-					<div style={{ width: `${(100 / maxHP) * currenrHP}%` }} />
-					<span>HP: {currenrHP}</span>
+					<div style={{ width: `${(100 / maxHP) * currentHP}%` }} />
+					<span>HP: {currentHP}</span>
 				</li>
 				<li>Damage: {damage}</li>
 				<li>Defend: {defend}</li>

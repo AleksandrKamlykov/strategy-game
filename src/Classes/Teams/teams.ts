@@ -1,7 +1,7 @@
 import { allOrksUnits } from './../Units/orks';
 import { allHumansUnits } from './../Units/humans';
 import { Indicators } from '../Indicators/indicators';
-import { IUnit, Unit, IUNITS } from './../Units/Unit';
+import { Unit } from './../Units/Unit';
 
 export enum Teams {
     A = "A",
@@ -13,29 +13,23 @@ export enum Races {
     ORK = "ORK"
 }
 
+export type TypeTeam = {
+    [Teams.A]: Unit[],
+    [Teams.B]: Unit[];
+};
+
 function randomNum(maxNum: number, minNum = 1) {
     return Math.floor(Math.random() * (maxNum - minNum) + minNum);
 }
 
 export class Team {
 
-    private _team: IUNITS[];
+    private _team: Unit[];
 
 
     constructor(race: Races) {
         this._team = Team.initTeam(race, 3);
     }
-
-    public attack(forward: IUNITS, target: IUNITS) {
-
-    }
-
-
-
-
-
-
-
 
 
     public static getrandomHuman() {
@@ -48,7 +42,14 @@ export class Team {
         return allOrksUnits[index];
     }
 
-    public static initTeam(race: Races, count: number): IUNITS[] {
+    public static getAllOrks(): Unit[] {
+        return allOrksUnits;
+    }
+    public static getAllHumans(): Unit[] {
+        return allHumansUnits;
+    }
+
+    public static initTeam(race: Races, count: number): Unit[] {
 
         const result: any = {};
 

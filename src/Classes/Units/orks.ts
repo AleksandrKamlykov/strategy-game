@@ -1,6 +1,5 @@
 import { Indicators } from './../Indicators/indicators';
-import { Races } from './../Teams/teams';
-import { IUNITS, IUnit } from './../Units/Unit';
+// import { Races } from './../Teams/teams';
 import { Unit } from "./Unit";
 
 
@@ -12,15 +11,14 @@ import musketerSRC from "../../images/Musketeer.png";
 import priestSRC from "../../images/Priest.png";
 import sworderSRC from "../../images/Sworder.png";
 
-
-export interface IOrk extends IUnit {
-    boost: () => void;
-    boostName: string;
+export enum Races {
+    HUMAN = "HUMAN",
+    ORK = "ORK"
 }
+
 
 export class Ork extends Unit {
 
-    boostName: string;
 
     constructor(name: string, maxHP: number, damage: number, defend: number, price: number, avatarSrc: string) {
         super(
@@ -30,15 +28,10 @@ export class Ork extends Unit {
             defend,
             price,
             avatarSrc,
-            "ORK",
+            Races.ORK,
         )
             ;
-        this.boost = this.boost.bind(this);
         this.boostName = 'fury (+ 20% damage)';
-    }
-
-    boost() {
-        this.damage = Math.floor(this.damage * 1.2);
     }
 }
 

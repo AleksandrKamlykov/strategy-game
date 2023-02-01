@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
-import { IUNITS } from "../../Classes/Units/Unit";
+import { TypeTeam } from '../../Classes/Teams/teams';
+import { Unit } from './../../Classes/Units/Unit';
+import { Dispatch, ReactNode } from "react";
 
 export interface MarketCardProps {
-    item: IUNITS;
+    item: Unit;
     children?: ReactNode;
 };

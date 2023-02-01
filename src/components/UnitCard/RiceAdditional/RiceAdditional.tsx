@@ -1,21 +1,20 @@
 import React, { FC } from 'react';
 import { RiceAdditionalProps } from '.';
 import classes from './styles.module.css';
+import { ACTION } from '../../../Classes/Actions/Actions';
+import { Unit } from '../../../Classes/Units/Unit';
 
-export const RiceAdditional: FC<RiceAdditionalProps> = ({ data, target, setTarget, team, game, nextOdd, forward }) => {
+export const RiceAdditional: FC<RiceAdditionalProps> = ({ data, target, team, game, forward, action, boost }) => {
 
-
-
-	function boost() {
-		data.boost();
-		setTarget(undefined);
-		nextOdd();
+	function boostUnit() {
+		boost(data);
 	}
 
 	return <button
 		className={classes.boost}
-		onClick={boost}
-		disabled={team !== game.oddTeams || data.name === forward.name}
+		onClick={boostUnit}
+		disabled={team !== game.oddTeams || data.name === forward?.name || data.isDead}
+		style={{ backgroundColor: (target?.name === data.name) && action === ACTION.BOOST ? "#299" : undefined }}
 	>
 		{
 			data.boostName

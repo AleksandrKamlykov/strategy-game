@@ -1,19 +1,22 @@
-import { IUNITS } from './../../Classes/Units/Unit';
+import { TypeTeam } from './../../Classes/Teams/teams';
+import { Dispatch } from 'react';
+import { Unit } from './../../Classes/Units/Unit';
 import { GameProccess } from '../../Classes/GameClass/Game';
 import { Teams } from '../../Classes/Teams/teams';
 import { ACTION } from '../../Classes/Actions/Actions';
-
 export interface BattleProps {
     teams: {
-        [Teams.A]: IUNITS[],
-        [Teams.B]: IUNITS[];
+        [Teams.A]: Unit[],
+        [Teams.B]: Unit[];
     },
     game: GameProccess,
-    target: IUNITS | undefined,
-    forward: IUNITS,
-    setForward: Function,
-    setTarget: Function,
+    target: Unit | undefined,
+    forward: Unit,
+    setForward: Dispatch<Unit>,
+    setTarget: Dispatch<Unit>,
     action: ACTION,
-    setAction: Function,
-    setGame: Function;
+    setAction: Dispatch<ACTION>,
+    setGame: Dispatch<GameProccess>;
+    setTeams: Dispatch<TypeTeam>;
+
 };

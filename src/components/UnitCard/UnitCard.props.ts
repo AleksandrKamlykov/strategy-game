@@ -1,17 +1,18 @@
+import { Dispatch } from 'react';
+import { JSXElementConstructor, ReactElement, ReactNode } from 'react';
 import { ACTION } from './../../Classes/Actions/Actions';
-import { IHuman } from './../../Classes/Units/humans';
-import { Teams } from './../../Classes/Teams/teams';
+import { Teams, TypeTeam } from './../../Classes/Teams/teams';
 import { GameProccess } from '../../Classes/GameClass/Game';
-import { IUnit, IUNITS } from './../../Classes/Units/Unit';
+import { Unit } from './../../Classes/Units/Unit';
 
 export interface UnitCardProps {
-    data: IUNITS;
-    target: IUNITS | undefined;
-    forward: IUNITS;
-    setTarget: Function;
+    data: Unit;
+    target: Unit | undefined;
+    forward: Unit;
     team: Teams;
-    game: any,
-    nextOdd: () => void;
+    game: GameProccess,
     action: ACTION;
-    setAction: Function;
+    attackUnit: (target: Unit) => void;
+    boost: (target: Unit) => void;
+    ActionsElement?: any;
 }
