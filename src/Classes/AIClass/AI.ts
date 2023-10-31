@@ -1,3 +1,4 @@
+import { Teams } from './../Teams/teams';
 import { Attacker } from './../Attacker/Attacker';
 import { Booster } from './../Booster/Booster';
 import { Unit } from "../Units/Unit";
@@ -60,7 +61,7 @@ export class AIBattle {
         return averageDamageEnemy > lowDamageOrk.damage ? lowDamageOrk : null;
     }
 
-    static attackEnemy(forwardUnit: Unit, forwardTeam: Unit[], enemyTeam: Unit[]): Unit | undefined {
+    static attackEnemy(forwardUnit: Unit, forwardTeam: Unit[], enemyTeam: Unit[]): { unit: Unit, team: Teams; } | undefined {
 
         const damage = forwardUnit.damage;
 
@@ -73,15 +74,15 @@ export class AIBattle {
         if (isBoostOrk && !this.boostNames.includes(isBoostOrk.name) && (forwardUnit.name !== isBoostOrk.name)) {
             console.log('boost', isBoostOrk);
             this.boostNames.push(isBoostOrk.name);
-            return isBoostOrk;
+            return { unit: isBoostOrk, team: Teams.B };
         }
         if (damage >= (minimalHPtUnit.currentHP + minimalHPtUnit.defend) || isFullHP) {
             console.log('minimalHPtUnit', minimalHPtUnit);
-            return minimalHPtUnit;
+            return { unit: minimalHPtUnit, team: Teams.A };
         } else {
             console.log('minimalPrecentUnit', minimalPrecentUnit);
             if (minimalPrecentUnit) {
-                return minimalPrecentUnit;
+                return { unit: minimalPrecentUnit, team: Teams.A };
             }
 
         }

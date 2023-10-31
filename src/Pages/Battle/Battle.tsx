@@ -21,9 +21,11 @@ export const Battle: FC<BattleProps> = ({ teams, game, target, forward, setForwa
 		setForward(teams[game.oddTeams][game.indexAUnit]);
 
 		const inittTeams = Object.assign({}, teams);
-		const teamB = Team.initTeam(Races.ORK, 3);
+		const teamB = Team.initTeam(3);
 
 		inittTeams[Teams.B] = teamB;
+		console.log(inittTeams);
+
 		setTeams(inittTeams);
 		setGame(new GameProccess(teams[Teams.A], teamB));
 	}, []);
@@ -61,14 +63,14 @@ export const Battle: FC<BattleProps> = ({ teams, game, target, forward, setForwa
 			return;
 		}
 
-		if (targetUnit.race === Races.ORK) {
+		if (targetUnit.team === Teams.B) {
 			setAction(ACTION.BOOST);
-			Booster.boost(targetUnit);
+			Booster.boost(targetUnit.unit);
 		} else {
 			setAction(ACTION.ATTACK);
-			Attacker.attack(forward, targetUnit);
+			Attacker.attack(forward, targetUnit.unit);
 		}
-		setTarget(targetUnit);
+		setTarget(targetUnit.unit);
 		const forwardUnit = game.nextOdd();
 		forwardUnit && setForward(forwardUnit);
 		const timer = setTimeout(() => {
@@ -109,7 +111,7 @@ export const Battle: FC<BattleProps> = ({ teams, game, target, forward, setForwa
 					Object.keys(teams).map((team: string) => {
 
 						return (<div key={team}>
-							<h3 style={{ color: team === Teams.A ? "#229" : "#292" }}>Team {team} - {teams[team as Teams][0].race}</h3>
+							<h3 style={{ color: team === Teams.A ? "#229" : "#292" }}>Team {team}</h3>
 							{
 								teams[team as Teams].map((item: Unit) => {
 

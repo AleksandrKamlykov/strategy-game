@@ -27,8 +27,8 @@ export class Team {
     private _team: Unit[];
 
 
-    constructor(race: Races) {
-        this._team = Team.initTeam(race, 3);
+    constructor() {
+        this._team = Team.initTeam(3);
     }
 
 
@@ -49,31 +49,18 @@ export class Team {
         return allHumansUnits;
     }
 
-    public static initTeam(race: Races, count: number): Unit[] {
+    public static initTeam(count: number): Unit[] {
 
         const result: any = {};
 
         while (Object.keys(result).length < count) {
 
-            if (race === Races.HUMAN) {
+            let unit = this.getrandomHuman();
 
-                let unit = this.getrandomHuman();
-
-                if (!result[unit.name]) {
-                    unit = result[unit.name] = unit;
-                }
-
+            if (!result[unit.name]) {
+                unit = result[unit.name] = unit;
             }
 
-            if (race === Races.ORK) {
-
-                let unit = this.getrandomOrk();
-
-                if (!result[unit.name]) {
-                    result[unit.name] = unit;
-                }
-
-            }
 
         }
 

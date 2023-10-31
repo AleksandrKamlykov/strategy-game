@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import React, {useState} from 'react';
 import './App.css';
-import { Battle } from './Pages/Battle';
-import { BrowserRouter, Link, Route, RouterProvider, Routes } from 'react-router-dom';
-import { Start } from './Pages/Start';
-import { Market } from './Pages/Market';
-import { Races, Team, Teams, TypeTeam } from './Classes/Teams/teams';
-import { GameProccess } from './Classes/GameClass/Game';
-import { Header } from './components/Header';
-import { ACTION } from './Classes/Actions/Actions';
-import { Unit } from './Classes/Units/Unit';
+import {Battle} from './Pages/Battle';
+import {BrowserRouter, Link, Route, Routes} from 'react-router-dom';
+import {Start} from './Pages/Start';
+import {Market} from './Pages/Market';
+import {Teams, TypeTeam} from './Classes/Teams/teams';
+import {GameProccess} from './Classes/GameClass/Game';
+import {Header} from './components/Header';
+import {ACTION} from './Classes/Actions/Actions';
+import {Unit} from './Classes/Units/Unit';
 
 
 function App() {

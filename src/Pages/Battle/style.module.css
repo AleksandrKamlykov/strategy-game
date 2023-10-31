@@ -1,5 +1,8 @@
 .game {
-    background-image: url(../../images/Desert.jpg);
+    /* background-image: url(../../images/Desert.jpg); */
+    background-image: url(../../assets/PNG/game_background_2/game_background_2.png);
+    background-position: center;
+    background-size: cover;
     min-height: 100vh;
 }
 

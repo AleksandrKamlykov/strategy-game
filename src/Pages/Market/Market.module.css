@@ -1,6 +1,7 @@
 .wrapper {
     min-height: 100vh;
-    background-image: url(../../images/Village_1.jpeg);
+    background-image: url(../../assets/PNG/game_background_3/game_background_3.1.png);
+    /* background-image: url(../../images/Village_1.jpeg); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -116,6 +117,7 @@
     padding: 10px;
     font-size: 1.2rem;
     cursor: pointer;
+    border-radius: 12px;
 }
 
 .add:disabled {

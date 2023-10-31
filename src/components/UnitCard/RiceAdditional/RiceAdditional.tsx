@@ -16,8 +16,6 @@ export const RiceAdditional: FC<RiceAdditionalProps> = ({ data, target, team, ga
 		disabled={team !== game.oddTeams || data.name === forward?.name || data.isDead}
 		style={{ backgroundColor: (target?.name === data.name) && action === ACTION.BOOST ? "#299" : undefined }}
 	>
-		{
-			data.boostName
-		}
+		Health + 10%
 	</button>;
 };

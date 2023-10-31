@@ -3,27 +3,39 @@ import { Races } from "../Teams/teams";
 export class Unit {
 
     private _name: string;
-    private _race: Races;
     private _currentHP: number;
     private _maxHP: number;
     private _damage: number;
     private _defend: number;
     private _price: number;
-    private _avatarSrc: string;
     private _isDead: boolean;
     private _boostName: string;
+    private _criticalProbability: number;
+    private _criticalDamage: number;
+    private _dodgeProbability: number;
 
-    constructor(name: string, maxHp: number, damage: number, defend: number, price: number, avatarSrc: string, race: Races,) {
+    private _srcIdle: string;
+    private _srcHurt: string;
+    private _srcAttack: string;
+    private _srcDeath: string;
+
+
+    constructor(name: string, maxHp: number, damage: number, defend: number, price: number, srcIdle: string, srcHurt: string, srcAttack: string, srcDeath: string) {
         this._name = name;
         this._maxHP = maxHp;
         this._currentHP = maxHp;
         this._defend = defend;
         this._damage = damage;
         this._price = price;
-        this._race = race;
-        this._avatarSrc = avatarSrc;
         this._isDead = false;
         this._boostName = '';
+        this._criticalProbability = 25;
+        this._criticalDamage = Math.floor(this._damage * 1.3);
+        this._dodgeProbability = 5;
+        this._srcIdle = srcIdle;
+        this._srcHurt = srcHurt;
+        this._srcAttack = srcAttack;
+        this._srcDeath = srcDeath;
     }
 
     public get damage(): number {
@@ -41,12 +53,8 @@ export class Unit {
     public get name(): string {
         return this._name;
     }
-    public get race(): Races {
-        return this._race;
-    }
-    public get avatarSrc(): string {
-        return this._avatarSrc;
-    }
+
+
     public get maxHP(): number {
         return this._maxHP;
     }
@@ -55,6 +63,27 @@ export class Unit {
     }
     public get boostName(): string {
         return this._boostName;
+    }
+    public get criticalProbability(): number {
+        return this._criticalProbability;
+    }
+    public get criticalDamage(): number {
+        return this._criticalDamage;
+    }
+    public get dodgeProbability(): number {
+        return this._dodgeProbability;
+    }
+    public get srcIdle(): string {
+        return this._srcIdle;
+    }
+    public get srcAttack(): string {
+        return this._srcAttack;
+    }
+    public get srcHurt(): string {
+        return this._srcHurt;
+    }
+    public get srcDeath(): string {
+        return this._srcDeath;
     }
 
 
@@ -76,12 +105,8 @@ export class Unit {
     public set price(value: number) {
         this._price = value;
     }
-    public set race(value: Races) {
-        this._race = value;
-    }
-    public set avatarSrc(value: string) {
-        this._avatarSrc = value;
-    }
+
+
     public set isDead(value: boolean) {
         this._isDead = value;
     }

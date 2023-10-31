@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 import arrowSrc from '../../images/Pointer.png';
 import coinsSrc from '../../images/coins.png';
-import { MarketCard } from '../../components/MarketCard';
 import { Races, Team, Teams, TypeTeam } from '../../Classes/Teams/teams';
 import { Unit } from '../../Classes/Units/Unit';
+import { UnitTemplate } from '../../components/UnitTemplate';
 
 export const Market: FC<MarketProps> = ({ teams, setTeams }) => {
 
@@ -40,6 +40,9 @@ export const Market: FC<MarketProps> = ({ teams, setTeams }) => {
 		setCoins(prev => prev + removeUnit.price);
 	}
 
+
+
+
 	return <div className={classes.wrapper}>
 		<div className={classes.menu}>
 			<div className={classes.coins}>{coins}<img width={70} src={coinsSrc} /></div>
@@ -57,29 +60,41 @@ export const Market: FC<MarketProps> = ({ teams, setTeams }) => {
 		<div className={classes.team}>
 			<h3>Your team</h3>
 			{
-				teams[Teams.A]?.map((item: Unit) => (<MarketCard key={item.name} item={item} >
-					<button
+				teams[Teams.A]?.map((item: Unit) => {
+
+					const Actions = () => <button
 						onClick={() => removeUnit(item)}
 						className={classes.add}
 					>
 						remove in team
-					</button>
-				</MarketCard>))
+					</button>;
+
+					return (<UnitTemplate
+						key={item.name}
+						item={item}
+						Actions={Actions}
+					/>);
+				})
 			}
 		</div>
 		<div className={classes.shop}>
 			{
 				Team.getAllHumans().map((item: Unit) => {
 
-					return (<MarketCard item={item} key={item.name}>
-						<button
-							onClick={() => buyUnit(item)}
-							className={classes.add}
-							disabled={hasUnitName.includes(item.name) || item.price > coins}
-						>
-							Add to team
-						</button>
-					</MarketCard>);
+					const Test = () => (<button
+						onClick={() => buyUnit(item)}
+						className={classes.add}
+						disabled={hasUnitName.includes(item.name) || item.price > coins}
+					>
+						Add to team - {item.price} coins
+					</button>);
+
+					return (<UnitTemplate
+						item={item}
+						key={item.name}
+						Actions={Test}
+					/>
+					);
 				})
 			}
 		</div>
